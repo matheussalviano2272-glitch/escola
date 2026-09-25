@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abuso e Assédio Sexual — Informação, Prevenção e Denúncia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     RESET & BASE
+  ========================================================= */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --tinta: #16182b;
+    --tinta-suave: #5a5f78;
+    --linha: #e4e5f0;
+    --papel: #fbfbfd;
+    --papel-alt: #f2f2fa;
+    --acento: #3c3a86;
+    --acento-claro: #6b64d6;
+    --acento-fundo: #edecfb;
+    --alerta: #c1440e;
+    --alerta-fundo: #fdece2;
+    --urgencia: #8a1338;
+    --urgencia-clara: #b8264f;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, Segoe UI, Roboto, sans-serif;
+
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --tinta: #eceaf7;
+      --tinta-suave: #a9abc4;
+      --linha: #33344a;
+      --papel: #14141f;
+      --papel-alt: #191a28;
+      --acento: #8f8aef;
+      --acento-claro: #b0acf5;
+      --acento-fundo: #22213a;
+      --alerta: #ff8a54;
+      --alerta-fundo: #34211a;
+      --urgencia: #ff6b8f;
+      --urgencia-clara: #ff97ae;
+    }
+  }
+  :root[data-theme="dark"] {
+    --tinta: #eceaf7; --tinta-suave: #a9abc4; --linha: #33344a;
+    --papel: #14141f; --papel-alt: #191a28; --acento: #8f8aef;
+    --acento-claro: #b0acf5; --acento-fundo: #22213a;
+    --alerta: #ff8a54; --alerta-fundo: #34211a;
+    --urgencia: #ff6b8f; --urgencia-clara: #ff97ae;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  body {
+    font-family: var(--sans);
+    background: var(--papel);
+    color: var(--tinta);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  img, svg { max-width: 100%; display: block; }
+
+  .wrap {
+    width: 95%;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
+
+  .rotulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--acento);
+    background: var(--acento-fundo);
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  .revela {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .revela.mostra { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .revela { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* =========================================================
+     NAV
+  ========================================================= */
+  header.nav {
+    position: fixed;
+    top: env(safe-area-inset-top, 0px);
+    left: 0; right: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--papel) 82%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--linha);
+  }
+  .nav-inner {
+    width: 95%; max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 66px;
+  }
+  .marca { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-weight: 600; font-size: 18px; }
+  .marca span.icone { font-size: 20px; }
+  .nav a.cta-nav {
+    background: var(--acento); color: #fff; text-decoration: none;
+    padding: 9px 20px; border-radius: 999px; font-size: 14px; font-weight: 600;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .nav a.cta-nav:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(60,58,134,.28); }
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 90px;
+    background:
+      radial-gradient(circle at 15% 25%, rgba(107,100,214,.20), transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(138,19,56,.14), transparent 45%),
+      var(--papel);
+    overflow: hidden;
+  }
+  .hero-figura {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .55;
+  }
+  .hero-conteudo { position: relative; z-index: 2; max-width: 760px; text-align: center; margin: 0 auto; }
+  .hero-conteudo .rotulo { background: rgba(255,255,255,.08); }
+  .hero h1 {
+    font-size: clamp(40px, 7.5vw, 80px);
+    line-height: 1.02;
+    margin-bottom: 22px;
+    color: var(--tinta);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--acento);
+  }
+  .hero p.sub {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--tinta-suave);
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+  .btn-primario {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--tinta);
+    color: var(--papel);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px 34px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-primario:hover { transform: translateY(-3px); box-shadow: 0 18px 34px rgba(22,24,43,.22); }
+  .hero-seta {
+    position: absolute;
+    bottom: 34px; left: 50%;
+    transform: translateX(-50%);
+    width: 30px; height: 46px;
+    border: 2px solid var(--linha);
+    border-radius: 20px;
+    display: flex; justify-content: center; padding-top: 8px;
+  }
+  .hero-seta::after {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--acento);
+    animation: desce 1.8s infinite;
+  }
+  @keyframes desce { 0% { opacity: 0; transform: translateY(0);} 40% {opacity: 1;} 100% { opacity: 0; transform: translateY(14px);} }
+
+  /* =========================================================
+     SEÇÕES GERAIS
+  ========================================================= */
+  section { padding: 100px 0; }
+  .cabecalho-secao { max-width: 680px; margin: 0 auto 56px; text-align: center; }
+  .cabecalho-secao h2 { font-size: clamp(28px, 4.2vw, 44px); margin-bottom: 16px; }
+  .cabecalho-secao p { color: var(--tinta-suave); font-size: 17px; }
+
+  .secao-alt { background: var(--papel-alt); }
+
+  /* =========================================================
+     CARROSSEL
+  ========================================================= */
+  #carrossel-secao { position: relative; }
+  .carrossel {
+    position: relative;
+    padding: 0 clamp(10px, 6vw, 66px);
+  }
+  .carrossel-janela {
+    overflow: hidden;
+    border-radius: 26px;
+    box-shadow: 0 30px 70px rgba(22,24,43,.14);
+  }
+  .carrossel-trilha {
+    display: flex;
+    transition: transform .7s cubic-bezier(.4,0,.2,1);
+  }
+  .slide {
+    position: relative;
+    flex: 0 0 100%;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 60px clamp(28px, 6vw, 70px);
+    background: var(--papel);
+    overflow: hidden;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    width: 300px; height: 300px;
+    right: -110px; top: -130px;
+    border-radius: 50%;
+    background: var(--acento-fundo);
+  }
+  .slide::after {
+    content: "";
+    position: absolute;
+    width: 190px; height: 190px;
+    left: -90px; bottom: -100px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--acento-fundo) 60%, transparent);
+  }
+  .slide-numero {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 13px; font-weight: 700; color: var(--tinta-suave); z-index: 2;
+  }
+  .slide-icone {
+    position: relative; z-index: 2;
+    flex: 0 0 156px; width: 156px; height: 156px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 32px;
+    background: linear-gradient(150deg, var(--acento-fundo), var(--papel));
+    font-size: 70px;
+    box-shadow: inset 0 0 0 1px rgba(60,58,134,.10), 0 15px 30px rgba(22,24,43,.08);
+    transition: transform .4s ease;
+  }
+  .slide:hover .slide-icone { transform: translateY(-6px) rotate(-2deg); }
+  .slide-corpo { position: relative; z-index: 2; max-width: 600px; }
+  .slide-tag { display: inline-block; margin-bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--acento); }
+  .slide-corpo h3 { font-size: clamp(24px, 3.4vw, 34px); margin-bottom: 14px; }
+  .slide-corpo p { color: var(--tinta-suave); font-size: 16px; }
+
+  .carrossel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; border-radius: 50%;
+    background: var(--papel); color: var(--tinta);
+    font-size: 30px; font-weight: 300; line-height: 1;
+    cursor: pointer; z-index: 10;
+    box-shadow: 0 10px 26px rgba(22,24,43,.15);
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .carrossel-btn:hover { transform: translateY(-50%) scale(1.08); background: var(--acento); color: #fff; }
+  .btn-anterior { left: 2px; }
+  .btn-proximo { right: 2px; }
+
+  .carrossel-rodape {
+    display: flex; align-items: center; justify-content: center;
+    gap: 22px; margin-top: 22px; flex-wrap: wrap;
+  }
+  .indicadores { display: flex; gap: 8px; }
+  .indicador {
+    width: 9px; height: 9px; padding: 0; border: none; border-radius: 20px;
+    background: var(--linha); cursor: pointer;
+    transition: width .3s ease, background .3s ease;
+  }
+  .indicador.ativo { width: 26px; background: var(--acento); }
+  .contador { font-size: 13px; font-weight: 700; color: var(--tinta-suave); }
+  .contador #num-atual { color: var(--acento); }
+  .progresso {
+    width: 100%; max-width: 420px; height: 3px; margin: 16px auto 0;
+    border-radius: 10px; overflow: hidden; background: var(--linha);
+  }
+  .progresso-barra { width: 0; height: 100%; background: var(--acento); border-radius: inherit; }
+  .progresso-barra.animando { animation: preencher 8s linear; }
+  @keyframes preencher { from { width: 0%; } to { width: 100%; } }
+
+  /* =========================================================
+     BLOCOS EXPLICATIVOS (o que é abuso / assédio)
+  ========================================================= */
+  .explica-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .explica-card {
+    background: var(--papel);
+    border: 1px solid var(--linha);
+    border-radius: 22px;
+    padding: 40px;
+    position: relative;
+  }
+  .explica-card .num {
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    background: var(--acento);
+    color: #fff; font-weight: 700; font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .explica-card:nth-child(2) .num { background: var(--urgencia); }
+  .explica-card h3 { font-size: 24px; margin-bottom: 14px; }
+  .explica-card p { color: var(--tinta-suave); font-size: 16px; }
+
+  /* =========================================================
+     CARDS (consequências / sinais / prevenção)
+  ========================================================= */
+  .grade-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+  .card-item {
+    background: var(--papel);
+    border: 1px solid var(--linha);
+    border-radius: 20px;
+    padding: 26px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(22,24,43,.10);
+    border-color: transparent;
+  }
+  .card-item .emoji { font-size: 30px; }
+  .card-item h4 { font-size: 16.5px; font-weight: 600; }
+
+  .card-item.alerta { border-color: color-mix(in srgb, var(--alerta) 30%, var(--linha)); }
+  .card-item.alerta .emoji { filter: saturate(1.1); }
+
+  /* =========================================================
+     PREVENÇÃO — destaque com contorno
+  ========================================================= */
+  .card-prevencao {
+    background: var(--acento-fundo);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform .3s ease;
+  }
+  .card-prevencao:hover { transform: translateY(-6px); }
+  .card-prevencao .emoji { font-size: 30px; }
+  .card-prevencao h4 { font-size: 16.5px; font-weight: 600; color: var(--tinta); }
+
+  /* =========================================================
+     DENÚNCIA — seção de impacto
+  ========================================================= */
+  .denuncia {
+    position: relative;
+    background: linear-gradient(155deg, var(--urgencia) 0%, var(--urgencia-clara) 100%);
+    color: #fff;
+    padding: 100px 0 110px;
+    overflow: hidden;
+  }
+  .denuncia::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,.14), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(255,255,255,.10), transparent 40%);
+  }
+  .denuncia .wrap { position: relative; z-index: 2; }
+  .denuncia .cabecalho-secao h2 { color: #fff; }
+  .denuncia .cabecalho-secao p { color: rgba(255,255,255,.86); }
+  .denuncia .rotulo { background: rgba(255,255,255,.16); color: #fff; }
+
+  .contatos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    margin-bottom: 46px;
+  }
+  .contato {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 20px;
+    padding: 30px 24px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    transition: transform .3s ease, background .3s ease;
+  }
+  .contato:hover { transform: translateY(-6px); background: rgba(255,255,255,.18); }
+  .contato .emoji { font-size: 34px; margin-bottom: 12px; }
+  .contato .numero { font-size: 26px; font-weight: 800; font-family: var(--serif); }
+  .contato .desc { font-size: 14px; color: rgba(255,255,255,.85); margin-top: 4px; }
+
+  .frase-impacto {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1.5;
+    padding: 40px 34px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.24);
+  }
+  .frase-impacto span.aspas { opacity: .5; font-size: 1.4em; line-height: 0; }
+
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+  footer {
+    padding: 40px 0 50px;
+    text-align: center;
+    color: var(--tinta-suave);
+    font-size: 13.5px;
+  }
+
+  /* =========================================================
+     RESPONSIVO
+  ========================================================= */
+  @media (max-width: 860px) {
+    .explica-grid { grid-template-columns: 1fr; }
+    .slide { flex-direction: column; text-align: center; gap: 26px; padding: 54px 30px 70px; }
+    .slide-corpo { max-width: 100%; }
+    .carrossel-btn { width: 42px; height: 42px; font-size: 26px; }
+  }
+  @media (max-width: 520px) {
+    section { padding: 70px 0; }
+    .hero { padding: 110px 16px 80px; }
+    .carrossel { padding: 0 4px; }
+    .btn-anterior, .btn-proximo { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="marca"><span class="icone">🛡️</span> Proteção &amp; Respeito</div>
+    <a class="cta-nav" href="#denuncia">Como denunciar</a>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section class="hero">
+  <div class="hero-conteudo">
+    <span class="rotulo">FEIRA DE CIÊNCIAS · CONSCIENTIZAÇÃO</span>
+    <h1>ABUSO E <em>ASSÉDIO</em> SEXUAL</h1>
+    <p class="sub">Informação, prevenção e denúncia para proteger vidas.</p>
+    <a href="#o-que-e" class="btn-primario">Saiba Mais ↓</a>
+  </div>
+  <div class="hero-seta"></div>
+</section>
+
+<!-- =========================================================
+     CARROSSEL
+========================================================= -->
+<section id="carrossel-secao">
+  <div class="wrap">
+    <div class="cabecalho-secao revela">
+      <span class="rotulo">POR QUE FALAR SOBRE ISSO?</span>
+      <h2>Quatro ideias para começar a mudança</h2>
+    </div>
+
+    <div class="carrossel" id="carrossel">
+      <div class="carrossel-janela">
+        <div class="carrossel-trilha">
+
+          <article class="slide">
+            <div class="slide-numero">01</div>
+            <div class="slide-icone">📢</div>
+            <div class="slide-corpo">
+              <span class="slide-tag">CONSCIENTIZAÇÃO</span>
+              <h3>Falar sobre o assunto é o primeiro passo</h3>
+              <p>Quanto mais o tema é discutido, mais fácil é reconhecer riscos e agir a tempo.</p>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="slide-numero">02</div>
+            <div class="slide-icone">🤝</div>
+            <div class="slide-corpo">
+              <span class="slide-tag">PROTEÇÃO</span>
+              <h3>Proteger é responsabilidade de todos</h3>
+              <p>Ouvir com atenção e acreditar em quem relata já é um ato de proteção.</p>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="slide-numero">03</div>
+            <div class="slide-icone">💜</div>
+            <div class="slide-corpo">
+              <span class="slide-tag">RESPEITO</span>
+              <h3>O consentimento não é negociável</h3>
+              <p>Escutar o "não" e respeitar limites são a base de qualquer relação saudável.</p>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="slide-numero">04</div>
+            <div class="slide-icone">🔒</div>
+            <div class="slide-corpo">
+              <span class="slide-tag">SEGURANÇA</span>
+              <h3>Ambientes seguros, físicos e digitais</h3>
+              <p>Conhecer os canais de apoio é fundamental para agir com rapidez.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <button class="carrossel-btn btn-anterior" type="button" aria-label="Slide anterior">‹</button>
+      <button class="carrossel-btn btn-proximo" type="button" aria-label="Próximo slide">›</button>
+
+      <div class="carrossel-rodape">
+        <div class="indicadores" aria-label="Navegação do carrossel"></div>
+        <div class="contador"><span id="num-atual">01</span> <span style="opacity:.4">/</span> 04</div>
+      </div>
+      <div class="progresso"><div class="progresso-barra"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     O QUE É ABUSO / ASSÉDIO SEXUAL
+========================================================= -->
+<section class="secao-alt" id="o-que-e">
+  <div class="wrap">
+    <div class="cabecalho-secao revela">
+      <span class="rotulo">ENTENDENDO O PROBLEMA</span>
+      <h2>Do que estamos falando?</h2>
+    </div>
+
+    <div class="explica-grid">
+      <div class="explica-card revela">
+        <div class="num">1</div>
+        <h3>O que é abuso sexual?</h3>
+        <p>Ocorre quando alguém é forçado ou pressionado a atos sexuais sem consentimento, deixando marcas físicas e emocionais.</p>
+      </div>
+
+      <div class="explica-card revela">
+        <div class="num">2</div>
+        <h3>O que é assédio sexual?</h3>
+        <p>Comentários, propostas ou gestos de natureza sexual sem consentimento — na escola, no trabalho ou na internet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CONSEQUÊNCIAS
+========================================================= -->
+<section id="consequencias">
+  <div class="wrap">
+    <div class="cabecalho-secao revela">
+      <span class="rotulo">IMPACTOS</span>
+      <h2>As consequências vão além do momento</h2>
+    </div>
+
+    <div class="grade-cards">
+      <div class="card-item revela"><div class="emoji">😰</div><h4>Ansiedade e medo</h4></div>
+      <div class="card-item revela"><div class="emoji">🪞</div><h4>Baixa autoestima</h4></div>
+      <div class="card-item revela"><div class="emoji">🚪</div><h4>Isolamento social</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SINAIS DE ALERTA
+========================================================= -->
+<section class="secao-alt" id="sinais">
+  <div class="wrap">
+    <div class="cabecalho-secao revela">
+      <span class="rotulo">FIQUE ATENTO</span>
+      <h2>Sinais de alerta</h2>
+      <p>Observar mudanças de comportamento ajuda a identificar situações de risco.</p>
+    </div>
+
+    <div class="grade-cards">
+      <div class="card-item alerta revela"><div class="emoji">🔄</div><h4>Mudança de comportamento</h4></div>
+      <div class="card-item alerta revela"><div class="emoji">😨</div><h4>Medo de alguém específico</h4></div>
+      <div class="card-item alerta revela"><div class="emoji">😢</div><h4>Tristeza frequente</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     COMO PREVENIR
+========================================================= -->
+<section id="prevencao">
+  <div class="wrap">
+    <div class="cabecalho-secao revela">
+      <span class="rotulo">AÇÃO</span>
+      <h2>Como prevenir?</h2>
+    </div>
+
+    <div class="grade-cards">
+      <div class="card-prevencao revela"><div class="emoji">💬</div><h4>Diálogo e confiança</h4></div>
+      <div class="card-prevencao revela"><div class="emoji">🙅</div><h4>Respeito aos limites</h4></div>
+      <div class="card-prevencao revela"><div class="emoji">💻</div><h4>Segurança na internet</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     DENÚNCIA
+========================================================= -->
+<section class="denuncia" id="denuncia">
+  <div class="wrap">
+    <div class="cabecalho-secao revela">
+      <span class="rotulo">🚨 AJA AGORA</span>
+      <h2>Como denunciar?</h2>
+      <p>Denunciar é um ato de cuidado.</p>
+    </div>
+
+    <div class="contatos">
+      <div class="contato revela">
+        <div class="emoji">📞</div>
+        <div class="numero">Disque 100</div>
+        <div class="desc">Direitos Humanos</div>
+      </div>
+      <div class="contato revela">
+        <div class="emoji">🚔</div>
+        <div class="numero">190</div>
+        <div class="desc">Polícia Militar</div>
+      </div>
+      <div class="contato revela">
+        <div class="emoji">👨‍👩‍👧‍👦</div>
+        <div class="numero">Conselho Tutelar</div>
+        <div class="desc">Proteção da infância e adolescência</div>
+      </div>
+    </div>
+
+    <div class="frase-impacto revela">
+      <span class="aspas">“</span>Você não precisa ter provas para denunciar. Uma suspeita pode ajudar a proteger uma vítima.<span class="aspas">”</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Feira de Ciências — Informação, prevenção e denúncia salvam vidas.</div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* =======================================================
+     REVELAÇÃO AO ROLAR
+  ======================================================= */
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("mostra");
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll(".revela").forEach((el) => observador.observe(el));
+
+  /* =======================================================
+     CARROSSEL
+  ======================================================= */
+  const carrossel = document.getElementById("carrossel");
+  const trilha = carrossel.querySelector(".carrossel-trilha");
+  const slides = carrossel.querySelectorAll(".slide");
+  const btnAnterior = carrossel.querySelector(".btn-anterior");
+  const btnProximo = carrossel.querySelector(".btn-proximo");
+  const indicadores = carrossel.querySelector(".indicadores");
+  const numAtual = document.getElementById("num-atual");
+  const barraProgresso = carrossel.querySelector(".progresso-barra");
+
+  const TEMPO_AUTOMATICO = 8000;
+  let indiceAtual = 0;
+  let intervalo;
+  let pausado = false;
+
+  slides.forEach((_, indice) => {
+    const ponto = document.createElement("button");
+    ponto.type = "button";
+    ponto.className = "indicador";
+    ponto.setAttribute("aria-label", `Ir para o slide ${indice + 1}`);
+    ponto.addEventListener("click", () => { irPara(indice); reiniciarTemporizador(); });
+    indicadores.appendChild(ponto);
+  });
+  const pontos = indicadores.querySelectorAll(".indicador");
+
+  function atualizar() {
+    trilha.style.transform = `translateX(-${indiceAtual * 100}%)`;
+    pontos.forEach((p, i) => p.classList.toggle("ativo", i === indiceAtual));
+    numAtual.textContent = String(indiceAtual + 1).padStart(2, "0");
+
+    barraProgresso.classList.remove("animando");
+    void barraProgresso.offsetWidth;
+    if (!pausado) barraProgresso.classList.add("animando");
+  }
+
+  function irPara(indice) {
+    if (indice < 0) indiceAtual = slides.length - 1;
+    else if (indice >= slides.length) indiceAtual = 0;
+    else indiceAtual = indice;
+    atualizar();
+  }
+
+  const proximo = () => irPara(indiceAtual + 1);
+  const anterior = () => irPara(indiceAtual - 1);
+
+  btnProximo.addEventListener("click", () => { proximo(); reiniciarTemporizador(); });
+  btnAnterior.addEventListener("click", () => { anterior(); reiniciarTemporizador(); });
+
+  function iniciarTemporizador() {
+    clearInterval(intervalo);
+    intervalo = setInterval(() => { if (!pausado) proximo(); }, TEMPO_AUTOMATICO);
+  }
+  function reiniciarTemporizador() { iniciarTemporizador(); }
+
+  carrossel.addEventListener("mouseenter", () => {
+    pausado = true;
+    barraProgresso.classList.remove("animando");
+  });
+  carrossel.addEventListener("mouseleave", () => { pausado = false; atualizar(); });
+
+  carrossel.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { proximo(); reiniciarTemporizador(); }
+    if (e.key === "ArrowLeft") { anterior(); reiniciarTemporizador(); }
+  });
+  carrossel.setAttribute("tabindex", "0");
+
+  let toqueInicial = 0;
+  carrossel.addEventListener("touchstart", (e) => { toqueInicial = e.changedTouches[0].screenX; }, { passive: true });
+  carrossel.addEventListener("touchend", (e) => {
+    const distancia = e.changedTouches[0].screenX - toqueInicial;
+    if (distancia < -50) { proximo(); reiniciarTemporizador(); }
+    if (distancia > 50) { anterior(); reiniciarTemporizador(); }
+  }, { passive: true });
+
+  atualizar();
+  iniciarTemporizador();
+});
+</script>
+</body>
+</html>
